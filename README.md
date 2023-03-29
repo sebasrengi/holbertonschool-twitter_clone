@@ -17,11 +17,6 @@
 | **Project**          |
 | -------------------- |
 | [twitter](./twitter) |
-
-## Author
-
-- Valentina Jaramillo Ramirez - [Github](https://github.com/valen2510) / [Twitter](https://twitter.com/valen2510)
-
 ## License
 
 Opensource project.
