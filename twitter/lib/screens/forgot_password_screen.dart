@@ -1,68 +1,112 @@
-import 'package:flutter/material.dart';
-import 'package:twitter/widgets/entry_field.dart';
-import 'package:twitter/widgets/flat_button.dart';
+// ignore_for_file: prefer_const_constructors
 
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({
-    Key? key,
-  }) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../widgets/entry_field.dart';
+import '../widgets/flat_button.dart';
+
+class ForgetPassword extends StatefulWidget {
+  const ForgetPassword({super.key});
 
   @override
-  State<ForgotPassword> createState() => FState();
+  State<ForgetPassword> createState() => _ForgetPasswordState();
 }
 
-class FState extends State<ForgotPassword> {
-  late TextEditingController _emailController;
+class _ForgetPasswordState extends State<ForgetPassword> {
+  TextEditingController _emailController = TextEditingController();
 
   @override
   void initState() {
-    _emailController = TextEditingController();
+    _emailController = _emailController;
+
     super.initState();
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _emailController = _emailController;
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext action) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          color: Colors.blue,
-          onPressed: () => {
-            Navigator.pop(action),
-          }
-        ),
-        backgroundColor: Colors.white,
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text(
-                'Forget Password',
-                style: TextStyle(fontWeight: FontWeight.bold,),),
-              Container(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  'Enter your email address below to receive password reset instruction.',
-                  style: TextStyle(
-                    color: Colors.grey.shade500,
-                  ),
+          leading: BackButton(
+            color: Colors.blue,
+            onPressed: (() {
+              Navigator.of(context).pop();
+            }),
+          ),
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          // ignore: prefer_const_constructors
+          title: Text(
+            "Forget Password",
+            style: TextStyle(color: Colors.black),
+          )),
+      body: Container(
+          child: SingleChildScrollView(
+        child: Column(
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            // ignore: prefer_const_constructors
+            SizedBox(
+              height: 150,
+            ),
+            // ignore: prefer_const_constructors
+            Center(
+              child: Text(
+                "Forget password",
+                style: GoogleFonts.mulish(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 20,
                 ),
               ),
-              CustomEntryField(
-                hint: 'Enter email',
-                controller: _emailController,
-                 isPassword: false,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Text(
+                "Enter your email address below to",
+                style: GoogleFonts.mulish(
+                  color: Colors.grey.shade500,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15,
+                ),
               ),
-              CustomFlatButton(
-                label: 'Submit',
-                onPressed: () => null,
-              ),],),),),);
+            ),
+            Center(
+              child: Text(
+                "recevie password reset instrection",
+                style: GoogleFonts.mulish(
+                  color: Colors.grey.shade500,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            Center(
+              child: CustomEntryField(
+                hint: 'Enter Email',
+                controller: _emailController,
+                isPassword: false,
+              ),
+            ),
+            Center(
+              child: CustomFlatButton(
+                label: "Submit",
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      )),
+    );
   }
 }

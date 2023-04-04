@@ -1,51 +1,84 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class SideBarMenu extends StatefulWidget {
-  const SideBarMenu({
-    Key? key,
-  }) : super(key: key);
+  const SideBarMenu({super.key});
 
   @override
-  State<SideBarMenu> createState() => MState();
+  State<SideBarMenu> createState() => _SideBarMenuState();
 }
 
-class MState extends State<SideBarMenu> {
+class _SideBarMenuState extends State<SideBarMenu> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext action) {
+  Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: <Widget>[
-          DrawerHeader(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[CircleAvatar(backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/60363752?s=400&u=1a49c9139906f74b3e886d95dc4751cc7d5f31b6&v=4'), maxRadius: 27,),],
+        children: [
+          Column(
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              DrawerHeader(
+                // margin: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(20),
+                child: Align(
+                  child: Column(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Row(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                'http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg'),
+                            radius: 30.0,
+                          ),
+                          SizedBox(
+                            width: 200,
+                          )
+                        ],
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          // ignore: sort_child_properties_last
+                          contentPadding: EdgeInsets.zero,
+                          title: const Text(
+                            "User Name",
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: const Text("0 Followers"),
+                          ),
+                          Container(
+                              padding: const EdgeInsets.all(5),
+                              child: const Text("0 Following")),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    children: <Widget>[Text('Jane Doe',),],
-                  ),),
-                Row(
-                  children: <Widget>[Text('0 Followers'), SizedBox(width: 20), Text('0 Following'),],
-                ),],),),
+              ),
+            ],
+          ),
           ListTile(
-            leading: Icon(Icons.man),
+            leading: Icon(Icons.person),
             title: Text('Profile'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.notes),
+            leading: Icon(Icons.list),
             title: Text('Lists'),
             onTap: () => null,
           ),
@@ -55,22 +88,26 @@ class MState extends State<SideBarMenu> {
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.flash_on_sharp),
+            leading: Icon(Icons.flash_on),
             title: Text('Moments'),
             onTap: () => null,
           ),
+          Divider(),
           ListTile(
-            title: Text('Settings and privacy', style: TextStyle(fontWeight: FontWeight.bold,)
-               ),
+            title: Text('Settings and privacy'),
             onTap: () => null,
           ),
           ListTile(
-            title: Text('Help Center', style: TextStyle(fontWeight: FontWeight.bold,)),
+            title: Text('Help Center'),
             onTap: () => null,
           ),
+          Divider(),
           ListTile(
-            title: Text('Logout', style: TextStyle(fontWeight: FontWeight.bold,)),
+            title: Text('Logout'),
             onTap: () => null,
-          ),],),);
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,6 +1,6 @@
 {
-    "name": "breaking_bad",
-    "short_name": "breaking_bad",
+    "name": "twitter",
+    "short_name": "twitter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

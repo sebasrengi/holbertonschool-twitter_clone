@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
 
-  class CustomEntryField extends StatelessWidget {
+class CustomEntryField extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
-  final bool isPassword;
-  const CustomEntryField({
-  Key? key,
-  required this.hint,
-  required this.controller,
-    this.isPassword = false,
-  }) : super(key: key);
+  late final bool isPassword;
+  // ignore: prefer_const_constructors_in_immutables
+  CustomEntryField(
+      {Key? key,
+      required this.hint,
+      required this.controller,
+      required this.isPassword})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_unnecessary_containers
     return Container(
-      margin: const EdgeInsets.all(15),
-      child: Center(
+      // ignore: prefer_const_constructors
+      child: Padding(
+        padding: EdgeInsets.all(20),
         child: TextField(
-        controller: controller,
-        obscureText: isPassword,
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: TextStyle(
-            color: Colors.grey.shade600,
+          controller: controller,
+          obscureText: isPassword,
+          decoration: InputDecoration(
+            filled: true, //<-- SEE HERE
+            fillColor: Colors.grey.shade200,
+            hintText: hint,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(width: 3, color: Colors.blue),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(
-              color: Colors.grey.shade600,
-          ),),),),),);
+        ),
+      ),
+    );
   }
 }

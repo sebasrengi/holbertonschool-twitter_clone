@@ -1,108 +1,128 @@
 import 'package:flutter/material.dart';
-import 'package:twitter/screens/home_screen.dart';
-import 'package:twitter/widgets/entry_field.dart';
-import 'package:twitter/widgets/flat_button.dart';
-import 'package:twitter/screens/signup_screen.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/screens/forgot_password_screen.dart';
+import 'package:twitter/screens/home_screen.dart';
+import 'package:twitter/screens/signup_screen.dart';
+import 'package:twitter/widgets/bottom_bar_menu.dart';
+import 'package:twitter/widgets/flat_button.dart';
 
+import '../widgets/entry_field.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({
-    Key? key,
-  }) : super(key: key);
-
+class SingIn extends StatefulWidget {
+  const SingIn({super.key});
 
   @override
-  State<SignIn> createState() => InState();
+  State<SingIn> createState() => _SingInState();
 }
 
-class InState extends State<SignIn> {
-  late TextEditingController _emailController;
-  late TextEditingController _passwordController;
+class _SingInState extends State<SingIn> {
+  late TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
+    _emailController = _emailController;
+    _passwordController = _passwordController;
     super.initState();
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _emailController = _emailController;
+    _passwordController = _passwordController;
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext action) {
+  Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Color.fromARGB(255, 247, 246, 246),
       appBar: AppBar(
-        title: Text(
-          'Sign In',
-          style: TextStyle(
-            color: Colors.black,
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          // ignore: prefer_const_constructors
+          title: Text(
+            "Sing in",
+            style: TextStyle(color: Colors.black),
+          )),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 50,
           ),
-        ),
-        backgroundColor: Colors.white,
+          // ignore: prefer_const_constructors
+          Container(
+            height: 100,
+            child: Image.asset('assets/images/tw1.png'),
+          ),
+          CustomEntryField(
+            hint: 'Enter email',
+            controller: _emailController,
+            isPassword: false,
+          ),
+          CustomEntryField(
+            hint: 'Enter password',
+            controller: _passwordController,
+            isPassword: true,
+          ),
+          Center(
+            child: CustomFlatButton(
+              label: "Submit",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BottomMenuBar()),
+                );
+              },
+            ),
+          ),
+          // ignore: prefer_const_constructors
+          SizedBox(
+            height: 50,
+          ),
+          GestureDetector(
+            onTap: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SignUp()),
+              );
+            }),
+            child: Center(
+              child: Text('Sign up',
+                  style: GoogleFonts.mulish(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                  )),
+            ),
+          ),
+          // ignore: prefer_const_constructors
+          SizedBox(
+            height: 30,
+          ),
+          GestureDetector(
+            onTap: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ForgetPassword()),
+              );
+            }),
+            child: Center(
+              child: Text('Forget password?',
+                  style: GoogleFonts.mulish(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                  )),
+            ),
+          ),
+        ],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              CustomEntryField(
-                hint: 'Enter email',
-                controller: _emailController,
-                isPassword: false,
-              ),
-              CustomEntryField(
-                hint: 'Enter password',
-                controller: _passwordController,
-                isPassword: true,
-              ),
-              GestureDetector(
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                  onPressed: () => {
-                    Navigator.push(
-                      action,
-                      MaterialPageRoute(builder: (action) => const HomeScreen(),
-                      ),
-                    )
-                  },
-                  child: Text(
-                    'Submit', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,
-                    ),),),),
-              GestureDetector(
-                child: TextButton(
-                  onPressed: () => {
-                    Navigator.push(
-                      action,
-                      MaterialPageRoute(builder: (action) => const SignUp(),
-                      ),
-                    )
-                  },
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromRGBO(0, 150, 255, 1.0)
-                    ),),),),
-              GestureDetector(
-                child: TextButton(
-                  onPressed: () => {
-                    Navigator.push(
-                      action,
-                      MaterialPageRoute(builder: (action) => const ForgotPassword(),
-                      ),
-                    )
-                  },
-                  child: Text(
-                    'Forget Password?', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromRGBO(0, 150, 255, 1.0)
-                    ),),),),],),),),);
+    );
   }
 }
