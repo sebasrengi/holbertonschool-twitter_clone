@@ -1,0 +1,10 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "9dc5b7c220af710beb20fe5db79e44c4c6e66c9869439d37c25f544ab071db4a"
+build_start_time: [1670979857, 699542999]
+build_end_time: [1670979857, 814939975]
+inputs:
+  ? "/Users/carlosam/Documents/CodeProjects/holberTasks/holbertonschool-twitter_clone/twitter/twitter/macos/Flutter/GeneratedPluginRegistrant.swift"
+  : !private [1670979733, 814714431]
+  "/Users/carlosam/Documents/CodeProjects/holberTasks/holbertonschool-twitter_clone/twitter/twitter/macos/Runner/AppDelegate.swift": !private [1664980164, 0]
+  ? "/Users/carlosam/Documents/CodeProjects/holberTasks/holbertonschool-twitter_clone/twitter/twitter/macos/Runner/MainFlutterWindow.swift"
+  : !private [1664980164, 0]

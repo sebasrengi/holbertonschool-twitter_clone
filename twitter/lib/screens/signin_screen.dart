@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/screens/forgot_password_screen.dart';
 import 'package:twitter/screens/home_screen.dart';
 import 'package:twitter/screens/signup_screen.dart';
-import 'package:twitter/widgets/bottom_bar_menu.dart';
+import 'package:twitter/widgets/entry_field.dart';
 import 'package:twitter/widgets/flat_button.dart';
 
-import '../widgets/entry_field.dart';
-
-class SingIn extends StatefulWidget {
-  const SingIn({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
 
   @override
-  State<SingIn> createState() => _SingInState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _SingInState extends State<SingIn> {
+class _SignInState extends State<SignIn> {
   late TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -39,86 +34,97 @@ class _SingInState extends State<SingIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 247, 246, 246),
-      appBar: AppBar(
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.white,
           centerTitle: true,
-          // ignore: prefer_const_constructors
-          title: Text(
-            "Sing in",
-            style: TextStyle(color: Colors.black),
-          )),
-      body: Column(
+          title: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                "Sing in",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 38,
+                ),
+              ),
+              ]
+            ),
+          ),
+        ),
+      ),
+      body: Column(       
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: 50,
-          ),
-          // ignore: prefer_const_constructors
-          Container(
+            width: 100,
             height: 100,
-            child: Image.asset('assets/images/tw1.png'),
+            child: Image.network(
+              'http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png',
+            ),
+          ),
+          SizedBox(
+            height: 15,
           ),
           CustomEntryField(
-            hint: 'Enter email',
-            controller: _emailController,
-            isPassword: false,
-          ),
+              hint: 'Enter email',
+              controller: _emailController,
+              isPassword: false),
           CustomEntryField(
-            hint: 'Enter password',
-            controller: _passwordController,
-            isPassword: true,
-          ),
+              hint: 'Enter password',
+              controller: _passwordController,
+              isPassword: true),
           Center(
             child: CustomFlatButton(
-              label: "Submit",
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const BottomMenuBar()),
-                );
-              },
-            ),
+                label: 'Submit',
+                onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                    )),
           ),
-          // ignore: prefer_const_constructors
-          SizedBox(
-            height: 50,
-          ),
-          GestureDetector(
-            onTap: (() {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SignUp()),
-              );
-            }),
-            child: Center(
-              child: Text('Sign up',
-                  style: GoogleFonts.mulish(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
-                  )),
-            ),
-          ),
-          // ignore: prefer_const_constructors
           SizedBox(
             height: 30,
           ),
           GestureDetector(
-            onTap: (() {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ForgetPassword()),
-              );
-            }),
+            onTap: (() => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUp()),
+                )),
             child: Center(
-              child: Text('Forget password?',
-                  style: GoogleFonts.mulish(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
-                  )),
+              child: Text(
+                'Sign up',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          GestureDetector(
+            onTap: (() => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ForgetPassword()),
+                )),
+            child: Center(
+              child: Text(
+                'Forget password?',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ),
         ],

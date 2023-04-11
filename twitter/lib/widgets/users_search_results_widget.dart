@@ -1,35 +1,53 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class UsersSearchResultsWidget extends StatelessWidget {
-  late final String name;
-  late final String username;
-  late final String imgUrl;
-  UsersSearchResultsWidget(
-      {Key? key,
+  final String name;
+  final String username;
+  final String bio;
+  final String imgUrl;
+  final bool isVerified;
+
+  const UsersSearchResultsWidget(
+    {Key? key,
       required this.name,
       required this.username,
-      required this.imgUrl})
-      : super(key: key);
+      required this.bio,
+      required this.imgUrl,
+      required this.isVerified
+    }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(imgUrl),
-      ),
-      title: Text(
-        name,
-        style: GoogleFonts.mulish(
-          fontSize: 12,
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 25,         
+          backgroundImage: NetworkImage(imgUrl),
         ),
-      ),
-      subtitle: Text(
-        '@$username',
-        style: GoogleFonts.mulish(
-          fontSize: 12,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              name,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25
+              )
+            ),
+            Text(
+              bio,
+              style: TextStyle(
+                fontSize: 23
+              )
+            ),
+          ],
+        ),
+        subtitle: Text(
+          username,
+          style: TextStyle(
+            fontSize: 23
+          )
         ),
       ),
     );

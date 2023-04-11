@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:twitter/widgets/entry_field.dart';
 import 'package:twitter/widgets/flat_button.dart';
-
-import '../providers/auth_state.dart';
-import '../widgets/entry_field.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -40,31 +37,40 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 247, 246, 246),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
+          elevation: 0,
           leading: BackButton(
             color: Colors.blue,
-            onPressed: (() {
-              Navigator.of(context).pop();
-            }),
+            onPressed: (() => Navigator.of(context).pop()),
           ),
-          elevation: 0.0,
           backgroundColor: Colors.white,
           centerTitle: true,
-          // ignore: prefer_const_constructors
           title: Text(
-            "Sing Up",
-            style: TextStyle(color: Colors.black),
-          )),
+            'Sing Up',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 26
+            )
+          )
+      ),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // ignore: prefer_const_constructors
               SizedBox(
-                height: 75,
+                height: 37,
               ),
-
+              SizedBox(
+            width: 90,
+            height: 90,
+            child: Image.network(
+            'http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png',
+            ),
+          ),
+              SizedBox(
+                height: 27,
+              ),
               CustomEntryField(
                 hint: 'Enter Name',
                 controller: _nameController,
@@ -81,19 +87,14 @@ class _SignUpState extends State<SignUp> {
                 isPassword: true,
               ),
               CustomEntryField(
-                hint: 'confirm Password',
+                hint: 'Confirm Password',
                 controller: _confirmController,
                 isPassword: true,
               ),
               Center(
-                child: CustomFlatButton(
-                  label: "Sing up",
-                  onPressed: () {
-                    signUpUser;
-                  },
-                ),
+                child:
+                    CustomFlatButton(label: "Sing up", onPressed: () => null),
               ),
-              // ignore: prefer_const_constructors
             ],
           ),
         ),
@@ -101,13 +102,12 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  void signUpUser() async {
+  /*void signUpUser() async {
     context.read<Auth>().signUpWithEmail(
+          context: context,
           email: _emailController.text,
           password: _passwordController.text,
-          context: context,
         );
     Navigator.pushNamed(context, '/homescreen');
-
-  }
+  }*/
 }

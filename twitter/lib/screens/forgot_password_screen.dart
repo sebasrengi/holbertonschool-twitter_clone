@@ -1,12 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../widgets/entry_field.dart';
-import '../widgets/flat_button.dart';
+import 'package:twitter/screens/home_screen.dart';
+import 'package:twitter/widgets/entry_field.dart';
+import 'package:twitter/widgets/flat_button.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -21,7 +16,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   void initState() {
     _emailController = _emailController;
-
     super.initState();
   }
 
@@ -34,61 +28,56 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
           leading: BackButton(
             color: Colors.blue,
-            onPressed: (() {
-              Navigator.of(context).pop();
-            }),
+            onPressed: (() => Navigator.of(context).pop()),
           ),
-          elevation: 0.0,
+          elevation: 0,
           backgroundColor: Colors.white,
           centerTitle: true,
-          // ignore: prefer_const_constructors
           title: Text(
-            "Forget Password",
-            style: TextStyle(color: Colors.black),
+            'Forget Password',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 26
+            ),
           )),
       body: Container(
           child: SingleChildScrollView(
         child: Column(
-          // ignore: prefer_const_literals_to_create_immutables
           children: [
-            // ignore: prefer_const_constructors
             SizedBox(
               height: 150,
             ),
-            // ignore: prefer_const_constructors
             Center(
               child: Text(
-                "Forget password",
-                style: GoogleFonts.mulish(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 20,
+                'Forget password',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700
                 ),
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Center(
               child: Text(
-                "Enter your email address below to",
-                style: GoogleFonts.mulish(
-                  color: Colors.grey.shade500,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15,
+                'Enter your email address below to',
+                style: TextStyle(
+                  fontSize: 20
                 ),
               ),
             ),
             Center(
               child: Text(
-                "recevie password reset instrection",
-                style: GoogleFonts.mulish(
-                  color: Colors.grey.shade500,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15,
-                ),
+                'recevie password reset instructions.',
+                style: TextStyle(
+                  fontSize: 20
+                )
               ),
             ),
             Center(
@@ -100,8 +89,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ),
             Center(
               child: CustomFlatButton(
-                label: "Submit",
-                onPressed: () {},
+                label: 'Submit',
+                onPressed: () => const HomeScreen(),
               ),
             ),
           ],

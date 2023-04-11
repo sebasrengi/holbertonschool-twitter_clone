@@ -1,41 +1,97 @@
-import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:firebase_auth/firebase_auth.dart' as authFB;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:twitter/models/user.dart';
-import 'package:twitter/widgets/showSnackbar.dart';
+
+enum Errors {
+  none,
+  matchError,
+  weakError,
+  existsError,
+  error,
+  wrongError,
+  noUserError
+}
 
 class Auth extends ChangeNotifier {
-  final auth.FirebaseAuth _FirebaseAuth = auth.FirebaseAuth.instance;
+  final authFB.FirebaseAuth _auth = authFB.FirebaseAuth.instance;
 
-   Future<void> signUpWithEmail({
+  final usersRef =
+      FirebaseFirestore.instance.collection('users').withConverter<User>(
+            fromFirestore: (snapshot, _) {
+              return User.fromJson(
+                snapshot.data() ?? {},
+              );
+            },
+            toFirestore: (user, _) => user.toJson(),
+          );
+
+  Future attemptSignUp({
     required String email,
+    required String name,
     required String password,
-    required BuildContext context,
+    required String passwordConfirmation,
   }) async {
+    if (password != passwordConfirmation) return Errors.matchError;
+
     try {
-      await _FirebaseAuth.createUserWithEmailAndPassword(
+      authFB.UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      await sendEmailVerification(context);
-    } on FirebaseAuthException catch (e) {
-      // if you want to display your own custom error message
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+      return usersRef
+          .add(User(
+            userID: userCredential.user!.uid,
+            email: email,
+            displayName: name,
+            userName: '@${name}Holberton',
+          ))
+          .then((value) => Errors.none)
+          .catchError((onError) => Errors.error);
+    } on authFB.FirebaseAuthException catch (firebaseError) {
+      switch (firebaseError.code) {
+        case 'email-already-in-use':
+          return Errors.existsError;
+        case 'weak-password':
+          return Errors.weakError;
+        case 'invalid-email':
+          return Errors.wrongError;
+        default:
+          return Errors.error;
       }
-      showSnackBar(
-          context, e.message!); // Displaying the usual firebase error message
     }
   }
-    Future<void> sendEmailVerification(BuildContext context) async {
+
+  Future attemptLogin({
+    required String email,
+    required String password,
+  }) async {
     try {
-     _FirebaseAuth.currentUser!.sendEmailVerification();
-      showSnackBar(context, 'Email verification sent!');
-    } on auth.FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!); // Display error message
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return Errors.none;
+    } on authFB.FirebaseAuthException catch (err) {
+      switch (err.code) {
+        case 'user-not-found':
+          return Errors.noUserError;
+        case 'wrong-password':
+          return Errors.wrongError;
+        default:
+          return Errors.error;
+      }
     }
+  }
+
+  Future logout() async {
+    await _auth.signOut() as authFB.User;
+  }
+
+  Future<User> getCurrentUserModel() async {
+    final currentUser = await _auth.currentUser;
+    final userDocument = await usersRef.doc(currentUser?.uid).get();
+    return User.fromJson(userDocument.data());
   }
 }

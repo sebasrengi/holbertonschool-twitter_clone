@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 class SideBarMenu extends StatefulWidget {
@@ -14,97 +12,158 @@ class _SideBarMenuState extends State<SideBarMenu> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
+        padding: EdgeInsets.all(10),
         children: [
-          Column(
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              DrawerHeader(
-                // margin: const EdgeInsets.all(8.0),
-                padding: const EdgeInsets.all(20),
-                child: Align(
-                  child: Column(
-                    // ignore: prefer_const_literals_to_create_immutables
+          DrawerHeader(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage:
+                        NetworkImage('http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png'),
+                        maxRadius: 28,
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
                     children: [
-                      Row(
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg'),
-                            radius: 30.0,
-                          ),
-                          SizedBox(
-                            width: 200,
-                          )
-                        ],
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          // ignore: sort_child_properties_last
-                          contentPadding: EdgeInsets.zero,
-                          title: const Text(
-                            "User Name",
-                            style: TextStyle(
+                      Text(
+                        'User Name',
+                        style: TextStyle(
                               color: Colors.black45,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600,
                             ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            child: const Text("0 Followers"),
-                          ),
-                          Container(
-                              padding: const EdgeInsets.all(5),
-                              child: const Text("0 Following")),
-                        ],
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      child: const Text(
+                        '0 Followers',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      child: const Text(
+                        '0 Following',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )),
+                  ],
+                ),
+              ],
+            )
+          ),
+          Divider(
+            color: Colors.black, //color of divider
+            height: 55, //height spacing of divider
+            thickness: 2, //thickness of divier line
           ),
           ListTile(
             leading: Icon(Icons.person),
-            title: Text('Profile'),
-            onTap: () => null,
+            title: const Text(
+              'Profile',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
           ListTile(
-            leading: Icon(Icons.list),
-            title: Text('Lists'),
-            onTap: () => null,
+            leading: Icon(Icons.menu),
+            title: const Text(
+              'List',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
           ListTile(
             leading: Icon(Icons.bookmark),
-            title: Text('Bookmark'),
-            onTap: () => null,
+            title: const Text(
+              'Bookmark',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
           ListTile(
             leading: Icon(Icons.flash_on),
-            title: Text('Moments'),
-            onTap: () => null,
+            title: const Text(
+              'Moments',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
-          Divider(),
-          ListTile(
-            title: Text('Settings and privacy'),
-            onTap: () => null,
+          Divider(
+            color: Colors.black, //color of divider
+            height: 55, //height spacing of divider
+            thickness: 2, //thickness of divier line
           ),
           ListTile(
-            title: Text('Help Center'),
-            onTap: () => null,
+            title: const Text(
+              'Settings and privacy',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
-          Divider(),
           ListTile(
-            title: Text('Logout'),
-            onTap: () => null,
+            title: const Text(
+              'Help Center',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text(
+              'Logout',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
